@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.26;
+
+contract mod{
+    uint a;
+    uint b;
+    uint c;
+    uint d;
+    address owner;
+    constructor (){
+        owner = msg.sender;
+    }
+    modifier myowner{
+        require(owner == msg.sender, "only owner has the access to the smart contract");
+        _;
+    }
+    function input(uint _a, uint _b, uint _c, uint _d) public myowner{
+        a = _a;
+        b = _b; 
+        c = _c;
+        d = _d;
+    }
+    function output() public view myowner returns (uint){
+        if( a>b && a>c && a>d){
+            return a;
+        }
+        else if ( b>a && b>c && b>d){
+            return b;
+        }
+        else if ( c>a && c>b && c>d){
+            return c;
+        }
+        else {
+            return d;
+        }
+    }
+}
